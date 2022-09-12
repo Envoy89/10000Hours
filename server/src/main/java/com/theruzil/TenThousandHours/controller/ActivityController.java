@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/activity")
 public class ActivityController {
 
-    ActivityService activityService;
+    private final ActivityService activityService;
 
     @Autowired
     public ActivityController(ActivityService activityService) {
