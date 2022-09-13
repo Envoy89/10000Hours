@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/activityTime")
+@RequestMapping(path = "/activity/{activityId}/time")
 public class ActivityTimeController {
 
     private final ActivityTimeService activityTimeService;
@@ -19,22 +19,22 @@ public class ActivityTimeController {
     }
 
     @PostMapping
-    public ActivityTime create(@RequestBody ActivityTime activityTime) {
-        return activityTimeService.create(activityTime);
+    public ActivityTime create(@PathVariable("activityId") Long activityId, @RequestBody ActivityTime activityTime) {
+        return activityTimeService.create(activityId, activityTime);
     }
 
     @GetMapping
-    public List<ActivityTime> findAll() {
-        return activityTimeService.findAll();
+    public List<ActivityTime> findAll(@PathVariable("activityId") Long activityId) {
+        return activityTimeService.findAllByActivityId(activityId);
     }
 
-    @GetMapping("/{id}")
-    public ActivityTime findById(@PathVariable Long id) {
-        return activityTimeService.findById(id);
+    @GetMapping("/{activityTimeId}")
+    public ActivityTime findById(@PathVariable Long activityTimeId) {
+        return activityTimeService.findById(activityTimeId);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        activityTimeService.delete(id);
+    @DeleteMapping("/{activityTimeId}")
+    public void delete(@PathVariable Long activityTimeId) {
+        activityTimeService.delete(activityTimeId);
     }
 }
